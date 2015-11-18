@@ -75,9 +75,9 @@ namespace RabbitMQ.Client.Impl
                 return true;
             }
 
-			var other = obj as RecordedBinding;
+            var other = obj as RecordedBinding;
 			
-			return Equals(other);
+            return Equals(other);
         }
 
         public override int GetHashCode()
