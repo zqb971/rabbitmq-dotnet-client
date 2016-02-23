@@ -323,6 +323,21 @@ namespace RabbitMQ.Client
         /// </summary>
         public string VirtualHost { get; set; }
 
+        private IUnhandledExceptionHandler unhandledExceptionHandler =
+            new Default;
+
+        public IUnhandledExceptionHandler UnhandledExceptionHandler
+        {
+            get
+            {
+                return unhandledExceptionHandler;
+            }
+            set
+            {
+                unhandledExceptionHandler = value;
+            }
+        }
+
         /// <summary>
         /// Given a list of mechanism names supported by the server, select a preferred mechanism,
         ///  or null if we have none in common.
