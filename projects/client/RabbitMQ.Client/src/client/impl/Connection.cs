@@ -83,6 +83,7 @@ namespace RabbitMQ.Client.Framing.Impl
         public EventHandler<EventArgs> m_connectionUnblocked;
         public IConnectionFactory m_factory;
         public IFrameHandler m_frameHandler;
+        private IUnhandledExceptionHandler unhandledExceptionHandler;
 
         public Guid m_id = Guid.NewGuid();
         public ModelBase m_model0;
@@ -115,10 +116,11 @@ namespace RabbitMQ.Client.Framing.Impl
 
         public Connection(IConnectionFactory factory, bool insist, IFrameHandler frameHandler)
         {
-            KnownHosts = null;
-            FrameMax = 0;
-            m_factory = factory;
-            m_frameHandler = frameHandler;
+            this.KnownHosts = null;
+            this.FrameMax = 0;
+            this.m_factory = factory;
+            this.m_frameHandler = frameHandler;
+            this.unhandledExceptionHandler = factory.UnhandledExceptionHandler;
             this.ConsumerWorkService = new ConsumerWorkService(factory.TaskScheduler);
 
             m_sessionManager = new SessionManager(this, 0);
@@ -1080,6 +1082,7 @@ entry.ToString());
                 }
                 catch (Exception e)
                 {
+                    unhandledExceptionHandler.HandleUnexpectedIOException(this, e);
                     HandleMainLoopException(new ShutdownEventArgs(
                         ShutdownInitiator.Library,
                         0,

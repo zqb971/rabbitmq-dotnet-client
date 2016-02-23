@@ -106,7 +106,7 @@ namespace RabbitMQ.Client
 
         /// <summary>
         /// Advanced option.
-        /// 
+        ///
         /// What task scheduler should consumer dispatcher use.
         /// </summary>
         TaskScheduler TaskScheduler { get; set; }
@@ -122,5 +122,10 @@ namespace RabbitMQ.Client
         /// timing out.
         /// </summary>
         TimeSpan ContinuationTimeout { get; set; }
+
+        /// <summary>
+        /// Sets an unhandled exception handler.
+        /// </summary>
+        IUnhandledExceptionHandler UnhandledExceptionHandler { get; set; }
     }
 }
