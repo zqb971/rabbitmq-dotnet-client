@@ -1,9 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\Local.props" />
   <!-- MSBuild Community Tasks -->
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\..\..\lib\MSBuild.Community.Tasks\</MSBuildCommunityTasksPath>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)MSBuild.Community.Tasks.Targets" />
   <!-- Gensrc dir -->
@@ -191,6 +193,9 @@
     </Compile>
     <Compile Include="..\RabbitMQ.Client\src\client\api\IStreamProperties.cs">
       <Link>src\client\api\IStreamProperties.cs</Link>
+    </Compile>
+    <Compile Include="..\RabbitMQ.Client\src\client\api\IUnhandledExceptionHandler.cs">
+      <Link>src\client\api\IUnhandledExceptionHandler.cs</Link>
     </Compile>
     <Compile Include="..\RabbitMQ.Client\src\client\api\NetworkConnection.cs">
       <Link>src\client\api\NetworkConnection.cs</Link>
@@ -408,6 +413,9 @@
     <Compile Include="..\RabbitMQ.Client\src\client\impl\ExtensionMethods.cs">
       <Link>src\client\impl\ExtensionMethods.cs</Link>
     </Compile>
+    <Compile Include="..\RabbitMQ.Client\src\client\impl\ForgivingUnhandledExceptionHandler.cs">
+      <Link>src\client\impl\ForgivingUnhandledExceptionHandler.cs</Link>
+    </Compile>
     <Compile Include="..\RabbitMQ.Client\src\client\impl\Frame.cs">
       <Link>src\client\impl\Frame.cs</Link>
     </Compile>
@@ -557,8 +565,8 @@
   </Target>
   <!-- Microsoft Windows 8 CSharp targets -->
   <Import Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets')" Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
-    <VisualStudioVersion>11.0</VisualStudioVersion>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <!-- Custom BeforeBuild-->
   <Target Name="BeforeBuild" DependsOnTargets="GenerateApi; Detokenize" />

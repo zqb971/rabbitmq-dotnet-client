@@ -324,7 +324,7 @@ namespace RabbitMQ.Client
         public string VirtualHost { get; set; }
 
         private IUnhandledExceptionHandler unhandledExceptionHandler =
-            new Default;
+            new ForgivingUnhandledExceptionHandler();
 
         public IUnhandledExceptionHandler UnhandledExceptionHandler
         {
